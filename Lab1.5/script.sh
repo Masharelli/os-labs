@@ -1,6 +1,6 @@
 #!/bin/bash
-direc='/Desktop/OS/linux-source-3.18/*'
-list='/Desktop/OS/os-labs/Lab1.5/linux_source_structure.txt'
+direc='/home/oscreader/linux-source-3.16/*'
+list='/home/oscreader/os-labs/Lab1.5/linux_source_structure.txt'
 
 for dir in $direc; do
     if [ -d "$dir" ]; then
