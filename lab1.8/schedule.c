@@ -11,7 +11,7 @@ struct Process{
 
 typedef struct Process *node;
 
-node Lista;
+node ordenada;
 static int idd=0;
 
 node create(uint8_t priorityA,uint8_t burstTimeA, uint8_t idA, uint64_t *ptr){
@@ -26,39 +26,39 @@ node create(uint8_t priorityA,uint8_t burstTimeA, uint8_t idA, uint64_t *ptr){
 }
 
 node insertPriority(node toInsert){
-	node tmp;
-	if (Lista == NULL || Lista->prioridad > toInsert->prioridad)
+	node tiempo;
+	if (ordenada == NULL || ordenada->prioridad > toInsert->prioridad)
         {
-        	toInsert->next = Lista;
-	        Lista = toInsert;
+        	toInsert->next = ordenada;
+	        ordenada = toInsert;
         }
         else{
-         	tmp = Lista;
- 
-        	while (tmp->next != NULL && tmp->next->prioridad < toInsert->prioridad){
-        		tmp = tmp->next; 
-        		toInsert->next = tmp->next;
-		        tmp->next = toInsert;
+         	tiempo = ordenada;
+
+        	while (tiempo->next != NULL && tiempo->next->prioridad < toInsert->prioridad){
+        		tiempo = tiempo->next;
+        		toInsert->next = tiempo->next;
+		        tiempo->next = toInsert;
 		 }
 	}
 }
 
 static node insertBurstTime(node toInsert){
-	node tmp;
-	if (Lista == NULL || Lista->burstTime > toInsert->burstTime)
+	node tiempo;
+	if (ordenada == NULL || ordenada->burstTime > toInsert->burstTime)
         {
-        	toInsert->next = Lista;
-	        Lista = toInsert;
+        	toInsert->next = ordenada;
+	        ordenada = toInsert;
         }
         else
 	{
-         	tmp = Lista;
- 
-        	while (tmp->next != NULL && tmp->next->burstTime < toInsert->burstTime)
-		{	        	
-			tmp = tmp->next; 
-        		toInsert->next = tmp->next;
-		        tmp->next = toInsert;
+         	tiempo = ordenada;
+
+        	while (tiempo->next != NULL && tiempo->next->burstTime < toInsert->burstTime)
+		{
+			tiempo = tiempo->next;
+        		toInsert->next = tiempo->next;
+		        tiempo->next = toInsert;
 		}
 	 }
 }
@@ -66,21 +66,21 @@ static node insertBurstTime(node toInsert){
 
 static node insertFIFO(node toInsert)
 {
-	node tmp;
-	if (Lista == NULL || Lista->id > toInsert->id)
+	node tiempo;
+	if (ordenada == NULL || ordenada->id > toInsert->id)
         {
-        	toInsert->next = Lista;
-	        Lista = toInsert;
+        	toInsert->next = ordenada;
+	        ordenada = toInsert;
         }
         else
 	{
-         	tmp = Lista;
- 
-        	while (tmp->next != NULL && tmp->next->id < toInsert->id)
-		{	        	
-			tmp = tmp->next; 
-        		toInsert->next = tmp->next;
-		        tmp->next = toInsert;
+         	tiempo = ordenada;
+
+        	while (tiempo->next != NULL && tiempo->next->id < toInsert->id)
+		{
+			tiempo = tiempo->next;
+        		toInsert->next = tiempo->next;
+		        tiempo->next = toInsert;
 		}
 	 }
 }
@@ -90,7 +90,7 @@ node insert(node toInsert, uint8_t option)
 	if(option == '1')
 	{
 		return insertFIFO(toInsert);
-	
+
 	}
 	else if(option == '3')
 	{
@@ -103,31 +103,31 @@ node insert(node toInsert, uint8_t option)
 	}
 }
 
-void TaskA()
+void Tarea1()
 {
 	printf("Soy tarea 1\n");
-	node tmp = Lista;
-	Lista = Lista->next;
-	free(tmp);
-	executeTask(Lista->ptrTask);
+	node tiempo = ordenada;
+	ordenada = ordenada->next;
+	free(tiempo);
+	executeTask(ordenada->ptrTask);
 }
 
-void TaskB()
+void Tarea2()
 {
 	printf("Soy tarea 2\n");
-	node tmp = Lista;
-	Lista = Lista->next;
-	free(tmp);
-	executeTask(Lista->ptrTask);
+	node tiempo = ordenada;
+	ordenada = ordenada->next;
+	free(tiempo);
+	executeTask(ordenada->ptrTask);
 }
 
-void TaskC()
+void Tarea3()
 {
 	printf("Soy tarea 3\n");
-	node tmp = Lista;
-	Lista = Lista->next;
-	free(tmp);
-	executeTask(Lista->ptrTask);
+	node tiempo = ordenada;
+	ordenada = ordenada->next;
+	free(tiempo);
+	executeTask(ordenada->ptrTask);
 }
 
 void executeTask(uint32_t *ptr)
@@ -136,11 +136,11 @@ void executeTask(uint32_t *ptr)
 	(*fun_ptr)();
 }
 void print(){
-	node tmp;
-	tmp=Lista;
-	while(tmp != NULL){
-        	printf ( "ID: %d, Prioridad: %d\n", tmp->id, tmp->prioridad);
-       		tmp = tmp->next;
+	node tiempo;
+	tiempo=ordenada;
+	while(tiempo != NULL){
+        	printf ( "ID: %d, Prioridad: %d\n", tiempo->id, tiempo->prioridad);
+       		tiempo = tiempo->next;
     }
 }
 
@@ -159,15 +159,15 @@ int main()
 	    	scanf("%c", &option);
 	}
 	printf("Option choosen: %c\n", option);
-    	/*ins = create(2,53,idd++,&TaskA);
+    	/*ins = create(2,53,idd++,&Tarea1);
 	insert(ins, option);
-    	ins = create(7,53,idd++, &TaskB);
+    	ins = create(7,53,idd++, &Tarea2);
 	insert(ins, option);
-    	ins = create(123,53,idd++, &TaskC);
+    	ins = create(123,53,idd++, &Tarea3);
 	insert(ins, option);
 	print();
-	executeTask((uint64_t*)&TaskA);*/
-	printf("Hola soy Tarea 2 con tiempo: 13\n");	
-	printf("Hola soy Tarea 1 con tiempo: 143\n");	
+	executeTask((uint64_t*)&Tarea1);*/
+	printf("Hola soy Tarea 2 con tiempo: 13\n");
+	printf("Hola soy Tarea 1 con tiempo: 143\n");
 	printf("Hola soy Tarea 3 con tiempo 210\n");
 }
