@@ -1,3 +1,6 @@
+Rocha Avila Hugo Masharelli A1633090	
+Juan Torres A01227885
+
 Lab 5.1 - Memory Management in Linux
 Instructions
 From the Beginning Linux Programming book, read chapter 7 on the Managing Memory section and do all code examples and exercises described there (Note: the book's pages are attached below). Below the requirements for this laboratory.
