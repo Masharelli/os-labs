@@ -1,0 +1,1 @@
+PARA COMPILAR USAR gcc server3.c -o server3 and gcc client3.c -o client3, after this PARA CORRER EL SIGUIENTE PROGRAMA:./server1 & and ./client3 x & ./client3 x & ./client3 x & for multiple Clients
